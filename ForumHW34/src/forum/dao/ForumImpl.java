@@ -24,7 +24,10 @@ public class ForumImpl implements Forum {
         if (post == null || getPostById(post.getPostId()) != null) {
             return false;
         }
-        posts = Arrays.copyOf(posts, size + 1);
+        if (size == posts.length) {
+            int newCapacity = (int) (posts.length * 1.2) + 1;
+            posts = Arrays.copyOf(posts, newCapacity);
+        }
         int index = Arrays.binarySearch(posts, 0, size, post, comparator);
         index = index >= 0 ? index : -index - 1;
         System.arraycopy(posts, index, posts, index + 1, size - index);
