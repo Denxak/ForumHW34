@@ -76,11 +76,11 @@ public class ForumImpl implements Forum {
 
     @Override
     public Post[] getPostsByAuthor(String author, LocalDate dateFrom, LocalDate dateTo) {
-        Post pattern = new Post(Integer.MIN_VALUE, null, author, null);
+        Post pattern = new Post(0, null, author, null);
         pattern.setDate(dateFrom.atStartOfDay());
         int from = Arrays.binarySearch(posts, 0, size, pattern, comparator);
         from = from >= 0 ? from : -from - 1;
-        pattern = new Post(Integer.MAX_VALUE, null, author, null);
+        pattern = new Post(0, null, author, null);
         pattern.setDate(dateTo.atTime(LocalTime.MAX));
         int to = Arrays.binarySearch(posts, 0, size, pattern, comparator);
         to = to >= 0 ? to : -to - 1;
